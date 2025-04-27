@@ -232,7 +232,10 @@ impl Witness {
         I: IntoIterator<Item = T>,
         T: AsRef<str>,
     {
-        let result: Vec<Vec<u8>> = iter.into_iter().map(|hex_str| Vec::from_hex(hex_str.as_ref())).collect::<Result<Vec<_>, _>>()?;
+        let result: Vec<Vec<u8>> = iter
+            .into_iter()
+            .map(|hex_str| Vec::from_hex(hex_str.as_ref()))
+            .collect::<Result<Vec<_>, _>>()?;
         Ok(Self::from_slice(&result))
     }
 }
@@ -897,7 +900,7 @@ mod test {
         let witness4: Witness = empty_data.iter().collect();
         assert!(witness4.is_empty());
     }
-    
+
     #[cfg(feature = "hex")]
     #[test]
     fn test_from_hex() {
